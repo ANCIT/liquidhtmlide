@@ -1,0 +1,430 @@
+<templates>
+	<template name="RAW-LiquidHTML" id="org.ancit.liquidhtml.templates.liqRAW"
+		description="Raw temporarily disables tag processing. This is useful for generating content (eg, Mustache, Handlebars) which uses conflicting syntax."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% raw %}
+		In Handlebars, {{ this }} will be HTML-escaped, but
+		{{{ that }}} will not.
+		{% endraw %}
+	</template>
+
+	<template name="url_encode- LiquidHTML" id="org.ancit.liquidhtml.templates.liqurl_encode"
+		description="Converts any URL-unsafe characters in a string into percent-encoded characters."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "john@liquid.com" ${cursor}| url_encode }}
+
+	</template>
+	<template name="upcase-LiquidHTML" id="org.ancit.liquidhtml.templates.liqupcase"
+		description="Makes each character in a string uppercase. It has no effect on strings which are already all uppercase"
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Parker Moore"${cursor} | upcase }}
+	</template>
+	<template name="uniq- LiquidHTML" id="org.ancit.liquidhtml.templates.liquniq"
+		description="Removes any duplicate elements in an array." context="html_tag"
+		enabled="true" autoinsert="true">
+		{% assign my_array = "ants, bugs, bees, bugs, ants" ${cursor}| split: ",
+		" %}
+		{{ my_array | uniq | join: ", " }}
+	</template>
+	<template name="truncatewords-Noellipsis-LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqtruncatewordsNoEllipsis"
+		description="You can avoid showing trailing characters by passing a blank string as the second parameter:"
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Ground control to Major Tom." ${cursor}| truncatewords: 3, "" }}
+	</template>
+	<template name="truncatewords-Custom ellipsis-LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqtruncatewordsCustmEllipsis"
+		description="truncatewords takes an optional second parameter that specifies the sequence of characters to be appended to the truncated string. By default this is an ellipsis (…), but you can specify a different sequence."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Ground control to Major Tom." ${cursor}| truncatewords: 3, "--" }}
+	</template>
+	<template name="truncatewords-LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqtruncatewords"
+		description="Shortens a string down to the number of words passed as the argument. If the specified number of words is less than the number of words in the string, an ellipsis (…) is appended to the string."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Ground control to Major Tom."${cursor} | truncatewords: 3 }}
+	</template>
+	<template name="truncate-No ellipsis- LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqtruncate-Noellipsis"
+		description="You can truncate to the exact number of characters specified by the first parameter and show no trailing characters by passing a blank string as the second parameter:"
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Ground control to Major Tom." ${cursor}| truncate: 20, "" }}
+	</template>
+	<template name="truncate-Custom ellipsis- LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqtruncate-Customellipsis"
+		description="truncate takes an optional second parameter that specifies the sequence of characters to be appended to the truncated string. By default this is an ellipsis (…), but you can specify a different sequence."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Ground control to Major Tom." ${cursor}| truncate: 25, ", and so on"
+		}}
+	</template>
+
+	<template name="truncate- LiquidHTML" id="org.ancit.liquidhtml.templates.liqtruncate"
+		description="truncate shortens a string down to the number of characters passed as a parameter. If the number of characters specified is less than the length of the string, an ellipsis (…) is appended to the string and is included in the character count."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Ground control to Major Tom." ${cursor}| truncate: 20 }}
+	</template>
+	<template name="times- LiquidHTML" id="org.ancit.liquidhtml.templates.liqtimes"
+		description="Multiplies a number by another number." context="html_tag"
+		enabled="true" autoinsert="true">
+		{{ 3${cursor} | times: 2 }}
+	</template>
+
+	<template name="strip_newlines-LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqstrip_newlines" description="Removes any newline characters (line breaks) from a string."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% capture string_with_newlines %}
+		Hello
+		there
+		{% endcapture %}
+		{{ string_with_newlines | strip_newlines }}
+	</template>
+
+	<template name="strip_html-LiquidHTML" id="org.ancit.liquidhtml.templates.liqstrip_html"
+		description="Removes any HTML tags from a string." context="html_tag"
+		enabled="true" autoinsert="true">
+		{{ "Have
+		<em>you</em>
+		read
+		<strong>Ulysses</strong>
+		?" | strip_html }}
+	</template>
+
+	<template name="strip-LiquidHTML" id="org.ancit.liquidhtml.templates.liqstrip"
+		description="Removes all whitespace (tabs, spaces, and newlines) from both the left and right side of a string. It does not affect spaces between words."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ " So much room for activities! " ${cursor}| strip }}
+	</template>
+
+	<template name="split-LiquidHTML" id="org.ancit.liquidhtml.templates.liqsplit"
+		description="Divides an input string into an array using the argument as a separator. split is commonly used to convert comma-separated items from a string to an array."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% assign beatles = "John, Paul, George, Ringo"${cursor} | split: ", "
+		%}
+		{% for member in beatles %}
+		{{ member }}
+		{% endfor %}
+	</template>
+
+	<template name="sort_natural-LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqsort_natural" description="Sorts items in an array by a property of an item in the array."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% assign my_array = "zebra, octopus, giraffe, Sally Snake" ${cursor}|
+		split: ", " %}
+		{{ my_array | sort_natural | join: ", " }}
+	</template>
+
+	<template name="sort-LiquidHTML" id="org.ancit.liquidhtml.templates.liqsort"
+		description="Sorts items in an array by a property of an item in the array. The order of the sorted array is case-sensitive."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% assign my_array = "zebra, octopus, giraffe, Sally Snake" ${cursor} |
+		split: ", " %}
+		{{ my_array | sort | join: ", " }}
+
+	</template>
+
+	<template name="slice- LiquidHTML" id="org.ancit.liquidhtml.templates.liqslice"
+		description="Returns a substring of 1 character beginning at the index specified by the argument passed in. An optional second argument specifies the length of the substring to be returned."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Liquid" ${cursor}| slice: 0 }}
+	</template>
+
+	<template name="size-LiquidHTML" id="org.ancit.liquidhtml.templates.liqsize"
+		description="Returns the number of characters in a string or the number of items in an array. size can also be used with dot notation (for example, {{ my_string.size }}). This allows you to use size inside tags such as conditionals."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Ground control to Major Tom."${cursor} | size }}
+
+	</template>
+
+	<template name="round- LiquidHTML" id="org.ancit.liquidhtml.templates.liqround"
+		description="Rounds an input number to the nearest integer or, if a number is specified as an argument, to that number of decimal places."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ 1.2 ${cursor}| round }}
+	</template>
+
+	<template name="reverse-string-LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqreverse-string"
+		description="reverse cannot be used directly on a string, but you can split a string into an array, reverse the array, and rejoin it by chaining together filters:"
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Ground control to Major Tom." ${cursor}| split: "" | reverse | join:
+		"" }}
+	</template>
+
+	<template name="reverse- LiquidHTML" id="org.ancit.liquidhtml.templates.liqreverse"
+		description="Reverses the order of the items in an array. reverse cannot reverse a string."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% assign my_array = "apples, oranges, peaches, plums" | split: ", " %}
+		{{ my_array | reverse | join: ", " }}
+	</template>
+
+	<template name="replace_first-LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqreplace_first"
+		description="Replaces only the first occurrence of the first argument in a string with the second argument."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% assign my_string = "Take my protein pills and put my helmet
+		on"${cursor} %}
+		{{ my_string | replace_first: "my", "your" }}
+	</template>
+
+	<template name="replace-LiquidHTML" id="org.ancit.liquidhtml.templates.liqreplace"
+		description="Replaces every occurrence of an argument in a string with the second argument."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Take my protein pills and put my helmet on"${cursor} | replace:
+		"my", "your" }}
+	</template>
+
+	<template name="remove_first-LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqremove_first"
+		description="Removes only the first occurrence of the specified substring from a string."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "I strained to see the train through the rain"${cursor} |
+		remove_first: "rain" }}
+	</template>
+
+	<template name="remove- LiquidHTML" id="org.ancit.liquidhtml.templates.liqremove"
+		description="Removes every occurrence of the specified substring from a string."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "I strained to see the train through the rain"${cursor} | remove:
+		"rain" }}
+	</template>
+
+	<template name="prepend-LiquidHTML" id="org.ancit.liquidhtml.templates.liqprepend"
+		description="Adds the specified string to the beginning of another string."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "apples, oranges, and bananas"${cursor} | prepend: "Some fruit: " }}
+	</template>
+
+	<template name="plus- LiquidHTML" id="org.ancit.liquidhtml.templates.liqplus"
+		description="Adds a number to another number." context="html_tag"
+		enabled="true" autoinsert="true">
+		{{ 4${cursor} | plus: 2 }}
+	</template>
+
+	<template name="newline_to_br-LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqnewline_to_br" description="Replaces every newline (\n) with an HTML line break "
+		context="html_tag" enabled="true" autoinsert="true">
+		{% capture string_with_newlines %}
+		Hello
+		there
+		{% endcapture %}
+
+		{{ string_with_newlines | newline_to_br }}
+
+	</template>
+
+	<template name="RAW-LiquidHTML" id="org.ancit.liquidhtml.templates.liqRAW"
+		description="Raw temporarily disables tag processing. This is useful for generating content (eg, Mustache, Handlebars) which uses conflicting syntax."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% raw %}
+		In Handlebars, {{ this }} will be HTML-escaped, but
+		{{{ that }}} will not.
+		{% endraw %}
+	</template>
+
+	<template name="modulo-LiquidHTML" id="org.ancit.liquidhtml.templates.liqmodulo"
+		description="Returns the remainder of a division operation." context="html_tag"
+		enabled="true" autoinsert="true">
+		{{ 3 {cursor}| modulo: 2 }}
+	</template>
+
+	<template name="map-LiquidHTML" id="org.ancit.liquidhtml.templates.liqmap"
+		description="Creates an array of values by extracting the values of a named property from another object.
+
+In this example, assume the object site.pages contains all the metadata for a website. Using assign with the map filter creates a variable that contains only the values of the category properties of everything in the site.pages object."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% assign all_categories = site.pages | map: "category" %}
+
+		{% for item in all_categories %}
+		{{ item }}
+		{% endfor %}
+	</template>
+
+	<template name="lstrip-LiquidHTML" id="org.ancit.liquidhtml.templates.liqIStrip"
+		description="Removes all whitespaces (tabs, spaces, and newlines) from the beginning of a string. The filter does not affect spaces between words."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ " So much room for activities! "${cursor} | lstrip }}
+	</template>
+
+	<template name="last-LiquidHTML" id="org.ancit.liquidhtml.templates.liqjoin"
+		description="Returns the last item of an array." context="html_tag"
+		enabled="true" autoinsert="true">
+		{% assign my_array = "apples, oranges, peaches, plums"${cursor} | split:
+		", " %}
+		{{ my_array.last }}
+	</template>
+
+	<template name="join-LiquidHTML" id="org.ancit.liquidhtml.templates.liqjoin"
+		description="Combines the items in an array into a single string using the argument as a separator."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% assign beatles = "John, Paul, George, Ringo"${cursor} | split: ", "
+		%}
+		{{ beatles | join: " and " }}
+	</template>
+
+	<template name="floor-LiquidHTML" id="org.ancit.liquidhtml.templates.liqfloor"
+		description="Rounds a number down to the nearest whole number. Liquid tries to convert the input to a number before the filter is applied"
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ 1.2 ${cursor}| floor }}
+	</template>
+
+	<template name="firstitem-LiquidHTML" id="org.ancit.liquidhtml.templates.liqfirst"
+		description="Returns the first item of an array." context="html_tag"
+		enabled="true" autoinsert="true">
+		{% assign my_array = "apples, oranges, peaches, plums" ${cursor}| split:
+		", " %}
+		{{ my_array.first }}
+
+	</template>
+
+	<template name="downcase- LiquidHTML" id="org.ancit.liquidhtml.templates.liqdowncase"
+		description="Makes each character in a string lowercase. It has no effect on strings which are already all lowercase."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "Parker Moore"${cursor} | downcase }}
+	</template>
+
+	<template name="divided_by-LiquidHTML" id="org.ancit.liquidhtml.templates.liqdivided_by"
+		description="Divides a number by the specified number.The result is rounded down to the nearest integer (that is, the floor) if the divisor is an integer."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ 16 ${cursor}| divided_by: 4 }}
+
+	</template>
+
+	<template name="default-LiquidHTML" id="org.ancit.liquidhtml.templates.liqdefault"
+		description="Allows you to specify a fallback in case a value doesn’t exist. default will show its value if the left side is nil, false, or empty.In this example, product_price is not defined, so the default value is used."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ product_price | default: 2.99 }}
+
+	</template>
+
+	<template name="datecurrent-LiquidHTML" id="org.ancit.liquidhtml.templates.liqcurrentdate"
+		description="To get the current time, pass the special word :now: or :today: to :date:"
+		context="html_tag" enabled="true" autoinsert="true">
+		This page was last updated at {{ "now" | date: "%Y-%m-%d %H:%M" }}.
+
+	</template>
+
+	<template name="date-LiquidHTML" id="org.ancit.liquidhtml.templates.liqdate"
+		description="Converts a timestamp into another date format" context="html_tag"
+		enabled="true" autoinsert="true">
+		{{ article.published_at | date: "%a, %b %d, %y" }}
+
+	</template>
+
+	<template name="concat- LiquidHTML" id="org.ancit.liquidhtml.templates.liqconcat"
+		description="Concatenates (joins together) multiple arrays. The resulting array contains all the items from the input arrays."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% assign fruits = "apples, oranges, peaches" | split: ", " %}
+		{% assign vegetables = "carrots, turnips, potatoes" | split: ", " %}
+
+		{% assign everything = fruits | concat: vegetables %}
+
+		{% for item in everything %}
+		- {{ item }}
+		{% endfor %}
+
+	</template>
+
+	<template name="compact-LiquidHTML" id="org.ancit.liquidhtml.templates.liqcompact"
+		description="By using compact when we create our site_categories array, we can remove all the nil values in the array.."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% assign site_categories = site.pages | map: 'category' | compact %}
+
+		{% for category in site_categories %}
+		{{ category }}
+		{% endfor %}
+
+	</template>
+
+	<template name="ceil- LiquidHTML" id="org.ancit.liquidhtml.templates.liqceil"
+		description="Rounds the input up to the nearest whole number. Liquid tries to convert the input to a number before the filter is applied."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ 1.2 ${cursor}| ceil }}
+
+	</template>
+
+	<template name="at_most - LiquidHTML" id="org.ancit.liquidhtml.templates.liqat_most"
+		description="Limits a number to a maximum value." context="html_tag"
+		enabled="true" autoinsert="true">
+		{{ 4 ${cursor}| at_most: 5 }}
+
+	</template>
+
+	<template name="at_least- LiquidHTML" id="org.ancit.liquidhtml.templates.liqat_least"
+		description="Limits a number to a minimum value." context="html_tag"
+		enabled="true" autoinsert="true">
+		{{ 4${cursor} | at_least: 5 }}
+
+	</template>
+
+	<template name="append-LiquidHTML" id="org.ancit.liquidhtml.templates.liqappend"
+		description="Concatenates two strings and returns the concatenated value."
+		context="html_tag" enabled="true" autoinsert="true">
+		{{ "/my/fancy/url" | append: ".html" ${cursor}}}
+
+	</template>
+
+	<template name="abs- LiquidHTML" id="org.ancit.liquidhtml.templates.liqabs"
+		description="Returns the absolute value of a number." context="html_tag"
+		enabled="true" autoinsert="true">
+		{{ -17${cursor} | abs }}
+
+	</template>
+
+	<template name="whitespacecontrol1- LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqwhitespacecontrol1"
+		description="By including hyphens in your assign tag, you can strip the generated whitespace from the rendered template: {%-, and -%}."
+		context="html_tag" enabled="true" autoinsert="true">
+		{%- assign my_variable = "tomato" -%}
+		{{ my_variable }}
+
+	</template>
+
+	<template name="accessingitems-LiquidHTML"
+		id="org.ancit.liquidhtml.templates.liqaccessingitems"
+		description="Accessing specific items in arrays, You can use square bracket [ ] notation to access a specific item in an array. Array indexing starts at zero."
+		context="html_tag" enabled="true" autoinsert="true">
+		<!-- if site.users = "Tobi", "Laura", "Tetsuro", "Adam" -->
+		{{ site.users[0] }}${cursor}
+		{{ site.users[1] }}
+		{{ site.users[3] }}
+
+
+	</template>
+
+	<template name="firstitem-LiquidHTML" id="org.ancit.liquidhtml.templates.liqfirst"
+		description="Returns the first item of an array." context="html_tag"
+		enabled="true" autoinsert="true">
+		{% assign my_array = "apples, oranges, peaches, plums" ${cursor}| split:
+		", " %}
+		{{ my_array.first }}
+
+	</template>
+
+	<template name="boolean- LiquidHTML" id="org.ancit.liquidhtml.templates.liqboolean"
+		description="Booleans are either true or false. No quotations are necessary when declaring a boolean:"
+		context="html_tag" enabled="true" autoinsert="true">
+		{% assign foo = true %}
+	</template>
+
+	<template name="decrement-LiquidHTML" id="org.ancit.liquidhtml.templates.liq"
+		description="Creates a new number variable, and decreases its value by one every time it is called. The initial value is -1."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% decrement variable %}
+
+	</template>
+
+	<template name="increment-LiquidHTML" id="org.ancit.liquidhtml.templates.liqincrement"
+		description="Creates a new number variable, and increases its value by one every time it is called. The initial value is 0."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% increment my_counter %}
+	</template>
+
+     <template name="Assign-LiquidHTML" id="org.ancit.liquidhtml.templates.liqVariable"
+		description="Variable tags create new Liquid variables.  and Creates a new variable."
+		context="html_tag" enabled="true" autoinsert="true">
+		{% assign my_variable = false %}
+        {% if my_variable != true %}
+         This statement is valid.${cursor}
+         {% endif %}
+	</template>
+	
+</templates>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors.templates">
+      <template
+            autoinsert="true"
+            contextTypeId="html_tag"
+            id="org.ancit.liquidhtml.templates.lqif"
+            name="If - LiquidHTML">
+         <pattern>
+            {% if product.title == &quot;Awesome Shoes&quot; %}
+  These shoes are awesome!
+{% endif %}
+         </pattern>
+      </template>
+      <template
+            autoinsert="true"
+            contextTypeId="html_tag"
+            id="org.ancit.liquidhtml.templates.lqfor"
+            name="For - LiquidHTML">
+         <pattern>
+            {% for product in collection.products %}
+    {{ product.title }}
+  {% endfor %}
+         </pattern>
+      </template>
+      <include
+            file="templates/templates.xml">
+      </include>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.ancit.liquidhtml.templates"
+            name="Sample Category">
+      </category>
+      <view
+            category="org.ancit.liquidhtml.templates"
+            class="org.ancit.liquidhtml.templates.views.SampleView"
+            icon="icons/sample.png"
+            id="org.ancit.liquidhtml.templates.views.SampleView"
+            inject="true"
+            name="Sample View">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               id="org.ancit.liquidhtml.templates.views.SampleView"
+               ratio="0.5"
+               relationship="right"
+               relative="org.eclipse.ui.views.ProblemView">
+         </view>
+         <newWizardShortcut
+               id="org.ancit.liquidhtml.templates.newWizardShortcut1">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.ancit.liquidhtml.templates.category"
+            class="wizard.NewThemeWizard"
+            id="org.ancit.liquidhtml.templates.wizard"
+            name="NewThemeWizard">
+      </wizard>
+      <category
+            id="org.ancit.liquidhtml.templates.category"
+            name="NewThemeCategory">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.ancit.liquidhtml.templates.liquidhtmlcommand"
+            name="LiquidHtml">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="org.ancit.liquidhtml.templates.liquidhtmlcommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
+         <command
+               commandId="org.ancit.liquidhtml.templates.liquidhtmlcommand"
+               style="push">
+         </command>
+         <menu
+               id="liquidhtml"
+               label="LiquidHtmlMenu">
+            <command
+                  commandId="org.ancit.liquidhtml.templates.liquidhtmlcommand"
+                  label="LiquidHtmlMenuCommand"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+
+</plugin>
